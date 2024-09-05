@@ -5,10 +5,6 @@ const app = express();
 const port = process.env.PORT || 3002;
 const cors = require('cors');
 
-// Middleware to parse JSON bodies
-app.use(express.json());
-app.use(morgan('combined'));
-
 // CORS enabling
 // Enable CORS with specific origin
 const corsOptions = {
@@ -19,6 +15,10 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+app.use(morgan('combined'));
 
 app.post('/organizations', async (req, res) => {
 	const client = await pool.connect();
