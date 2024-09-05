@@ -10,6 +10,7 @@ const cors = require('cors');
 const corsOptions = {
 	origin: [
 		'https://sales-project-frontend-production.up.railway.app',
+		'http://sales-project-backend-production.up.railway.app',
 		process.env.MODE === 'development' && 'http://localhost:3001',
 	],
 };
