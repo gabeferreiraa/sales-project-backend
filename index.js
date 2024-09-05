@@ -2,7 +2,7 @@ const { pool, releaseClient } = require('./db/index');
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
-const port = 3002;
+const port = process.env.PORT || 3002;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
