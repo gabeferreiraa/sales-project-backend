@@ -3,44 +3,22 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 const port = process.env.PORT || 3002;
+const cors = require('cors');
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(morgan('combined'));
 
 // CORS enabling
-app.use(function (req, res, next) {
-	res.setHeader('Access-Control-Allow-Headers', [
-		'X-Requested-With',
-		'X-HTTP-Method-Override',
-		'Content-Type',
-		'Accept',
-		'Authorization',
-		'enctype',
-	]);
-	res.setHeader('Access-Control-Allow-Methods', [
-		'GET',
-		'PUT',
-		'POST',
-		'PATCH',
-		'DELETE',
-		'UPDATE',
-		'OPTIONS',
-	]);
+// Enable CORS with specific origin
+const corsOptions = {
+	origin: [
+		'https://sales-project-frontend-production.up.railway.app',
+		process.env.MODE === 'development' && 'http://localhost:3001',
+	],
+};
 
-	// Enable credentials
-	res.setHeader('Access-Control-Allow-Credentials', 'true');
-
-	// Dynamically set the allowed origin
-	const origin = req.headers.origin || 'http://localhost';
-	res.setHeader('Access-Control-Allow-Origin', origin);
-
-	if (req.method.toLowerCase() === 'options') {
-		res.sendStatus(200);
-	} else {
-		next();
-	}
-});
+app.use(cors(corsOptions));
 
 app.post('/organizations', async (req, res) => {
 	const client = await pool.connect();
