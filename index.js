@@ -6,7 +6,7 @@ const port = 3002;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-app.use(morgan());
+app.use(morgan('combined'));
 
 // CORS enabling
 app.use(function (req, res, next) {
