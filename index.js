@@ -16,7 +16,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
+app.options('*', cors(corsOptions));
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(morgan('combined'));
