@@ -10,13 +10,13 @@ const cors = require('cors');
 const corsOptions = {
 	origin: [
 		'https://sales-project-frontend-production.up.railway.app',
-		'http://sales-project-backend-production.up.railway.app',
-		process.env.MODE === 'development' && 'http://localhost:3001',
+		process.env.MODE === 'development' && 'http://localhost:3000', // Whatever port the frontend is running on in development
 	],
+	credentials: true,
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(morgan('combined'));
